@@ -3,6 +3,8 @@ import 'package:wyy_flutter/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wyy_flutter/scroll_widget.dart';
 import 'package:wyy_flutter/util.dart';
+import 'package:wyy_flutter/provider.dart';
+import 'package:wyy_flutter/dialog.dart';
 
 class HomeApp extends StatefulWidget{
   @override
@@ -165,21 +167,28 @@ class MyDrawer extends StatelessWidget{
               ),
             ),
 
-            Container(
-              padding: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.add),
-                  Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Text(
-                          "Add",
-                        ),
-                      )
-                  ),
-                ],
+            FlatButton(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.store),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "shopping",
+                          ),
+                        )
+                    ),
+                  ],
+                ),
               ),
+              onPressed: () {
+                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                  return new ShoppingCartApp();
+                }));
+              },
             ),
             FlatButton(
               child: Container(
@@ -203,7 +212,30 @@ class MyDrawer extends StatelessWidget{
                   return new CustomScrollViewTestRoute();
                 }));
               },
-            )
+            ),
+            FlatButton(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.dialpad),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "dialog",
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                  return new AlertDialogApp();
+                }));
+              },
+            ),
           ],
         ),
       ),
