@@ -82,3 +82,6 @@ flutter:
   assets:
     - images/ico_go_back.png
     - images/ico_go_back_while.png
+    - images/ico_login_top.png
+    - images/ico_login_phone.png
+    - images/ico_login_pwd.png

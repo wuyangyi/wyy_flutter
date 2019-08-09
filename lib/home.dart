@@ -5,6 +5,13 @@ import 'package:wyy_flutter/scroll_widget.dart';
 import 'package:wyy_flutter/util.dart';
 import 'package:wyy_flutter/provider.dart';
 import 'package:wyy_flutter/dialog.dart';
+import 'package:wyy_flutter/listener.dart';
+import 'package:wyy_flutter/gesturerecognizer.dart';
+import 'package:wyy_flutter/login.dart';
+import 'package:wyy_flutter/event.dart';
+import 'package:wyy_flutter/notification.dart';
+import 'package:wyy_flutter/anima.dart';
+import 'package:flutter/cupertino.dart';
 
 class HomeApp extends StatefulWidget{
   @override
@@ -134,7 +141,29 @@ class _HomeState extends State<HomeApp> with SingleTickerProviderStateMixin {
 }
 
 //抽屉
-class MyDrawer extends StatelessWidget{
+class MyDrawer extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    return new MyDrawerState();
+  }
+
+
+
+
+}
+
+class MyDrawerState extends State<MyDrawer> {
+
+  String name = "小熊";
+
+  @override
+  void initState() {
+    super.initState();
+    bus.on("login", (arg) {
+      name = arg;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -142,28 +171,35 @@ class MyDrawer extends StatelessWidget{
         color: Color(0xFFFFFFFF),
         child: Column(
           children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 50.0),
-              padding: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-              child: Row(
-                children: <Widget>[
-                  ClipOval(
-                    child: Image.network(
-                      "https://ws1.sinaimg.cn/large/0065oQSqly1fw8wzdua6rj30sg0yc7gp.jpg",
-                      fit: BoxFit.cover,
-                      height: 80.0,
-                      width: 80.0,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                  return new LoginApp();
+                }));
+              },
+              child: Container(
+                margin: const EdgeInsets.only(top: 50.0),
+                padding: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    ClipOval(
+                      child: Image.network(
+                        "https://ws1.sinaimg.cn/large/0065oQSqly1fw8wzdua6rj30sg0yc7gp.jpg",
+                        fit: BoxFit.cover,
+                        height: 80.0,
+                        width: 80.0,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Text(
-                          "小熊",
-                        ),
-                      )
-                  ),
-                ],
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            name,
+                          ),
+                        )
+                    ),
+                  ],
+                ),
               ),
             ),
 
@@ -236,12 +272,147 @@ class MyDrawer extends StatelessWidget{
                 }));
               },
             ),
+            FlatButton(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.youtube_searched_for),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "listener",
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                  return new ListenerApp();
+                }));
+              },
+            ),
+            FlatButton(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.move_to_inbox),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "move",
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                  return new MoveWidgetApp();
+                }));
+              },
+            ),
+            FlatButton(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.gesture),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "gesturerecognizer",
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                  return new GestureRecognizeApp();
+                }));
+              },
+            ),
+            FlatButton(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.print),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "Notification",
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: () {
+//                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+//                  return new NotificationApp();
+//                }));
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500), //动画时长500ms
+                    pageBuilder: (BuildContext contex, Animation animation, Animation secondaryAnimation) {
+                      return new FadeTransition(
+                        opacity: animation, //使用渐隐渐入的动画
+                        child: NotificationApp(),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+            FlatButton(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.airline_seat_recline_normal),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "动画",
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: () {
+
+                //用ios路由切换动画CupertinoPageRoute
+                //需要导入包import 'package:flutter/cupertino.dart';
+                // 下面是ios切换例子
+
+                // android的为MaterialPageRoute
+                //例：Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                //     return new ScaleAnimationApp();
+                //   }));
+                Navigator.push(context, CupertinoPageRoute(
+                  builder: (context) => ScaleAnimationApp(),
+                ));
+              },
+            ),
           ],
         ),
       ),
     );
   }
-
 }
 
 
