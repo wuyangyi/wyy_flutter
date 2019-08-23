@@ -12,6 +12,8 @@ import 'package:wyy_flutter/event.dart';
 import 'package:wyy_flutter/notification.dart';
 import 'package:wyy_flutter/anima.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:wyy_flutter/my_widget/widget_canvas.dart';
+import 'package:wyy_flutter/http/dio_text.dart';
 
 class HomeApp extends StatefulWidget{
   @override
@@ -124,7 +126,7 @@ class _HomeState extends State<HomeApp> with SingleTickerProviderStateMixin {
             return Container(
               alignment: Alignment.center,
               color: Color(0xFFF0F0F0),
-              child: e == "关注" ? InfiniteListViewApp() : InfiniteGridViewApp(),
+              child: e == "关注" ? InfiniteListViewApp() : e == "推荐" ? InfiniteGridViewApp() : DioTextRoute(),
             );
           }).toList(),
         ),
@@ -406,6 +408,29 @@ class MyDrawerState extends State<MyDrawer> {
                 Navigator.push(context, CupertinoPageRoute(
                   builder: (context) => ScaleAnimationApp(),
                 ));
+              },
+            ),
+            FlatButton(
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.games),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "五子棋",
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                  return new ChessPage();
+                }));
               },
             ),
           ],

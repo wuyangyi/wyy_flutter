@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   fluttertoast: ^3.0.3
   english_words: ^3.1.0
+  dio: ^2.1.13
 
 # 开发环境依赖的工具包
 dev_dependencies:

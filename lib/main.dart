@@ -4,6 +4,7 @@ import 'package:wyy_flutter/row_column.dart';
 import 'package:wyy_flutter/decorated_box.dart';
 import 'package:wyy_flutter/home.dart';
 import 'package:wyy_flutter/scroll_widget.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());
 
