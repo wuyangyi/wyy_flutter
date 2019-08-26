@@ -30,6 +30,13 @@ dependencies:
   fluttertoast: ^3.0.3
   english_words: ^3.1.0
   dio: ^2.1.13
+  camera: ^0.5.4
+  path_provider: ^1.2.0
+  video_player: ^0.10.2 #视频播放
+  chewie: ^0.9.7 #视频播放(非官方的)
+  image_picker: ^0.6.1+3 #图片选择或者视频选择
+  orientation: ^1.0.5 #横竖屏
+
 
 # 开发环境依赖的工具包
 dev_dependencies:
@@ -86,3 +93,4 @@ flutter:
     - images/ico_login_top.png
     - images/ico_login_phone.png
     - images/ico_login_pwd.png
+    - images/ico_head.png

@@ -14,6 +14,7 @@ import 'package:wyy_flutter/anima.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wyy_flutter/my_widget/widget_canvas.dart';
 import 'package:wyy_flutter/http/dio_text.dart';
+import 'package:wyy_flutter/camera.dart';
 
 class HomeApp extends StatefulWidget{
   @override
@@ -72,9 +73,11 @@ class _HomeState extends State<HomeApp> with SingleTickerProviderStateMixin {
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.share),
+              icon: Icon(Icons.camera_alt),
               onPressed: () {
-                ToastUtil("分享");
+                Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                  return new CameraApp();
+                }));
               },
             ),
           ],

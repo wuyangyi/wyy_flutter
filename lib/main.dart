@@ -4,9 +4,14 @@ import 'package:wyy_flutter/row_column.dart';
 import 'package:wyy_flutter/decorated_box.dart';
 import 'package:wyy_flutter/home.dart';
 import 'package:wyy_flutter/scroll_widget.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
-void main() => runApp(MyApp());
+import 'package:camera/camera.dart';
+import 'package:wyy_flutter/camera.dart';
+import 'dart:async';
+List<CameraDescription> cameras;
+void main() async {
+  cameras = await availableCameras();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -32,6 +37,7 @@ class MyApp extends StatelessWidget {
         "outline_button": (context) => CheckBoxApp(),
         "input_text": (context) => InputTextApp(),
         "row_column": (context) => RowColumnApp(),
+        "video_player": (context) => ChewieVideoPlayerApp(),
       },
       home: HomeApp(),
     );
